@@ -89,7 +89,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	public Iterator<PriorityQueueItem<E>> iterator()
 	{
 		// TODO write appropriate code - see PriortyQueueIterator constructor
-		return null;
+		return new PriorityQueueIterator<>(this);
 	}
 
 	/**
@@ -103,7 +103,10 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	public PriorityQueueItem<E> peek()
 	{
 		// TODO fill in appropriate code, replace default return statement
-		return null;
+		if (this.currentSize==0){
+			throw new NoSuchElementException();
+		}
+		return this.array[1];
 	}
 
 	/**
