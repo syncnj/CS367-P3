@@ -66,24 +66,27 @@ public class Course
 		{
 		// TODO : populate courseRoster from registrationQueue
 		// Use the PriorityQueueIterator for this task.
+			PriorityQueueIterator<Student> itr = new PriorityQueueIterator<>(this.registrationQueue);
+			while (itr.hasNext()){
 
+			}
 		}
 
 	public String getCourseName()
 		{
-		// TODO
-		return null;
+		// TODO - done
+		return this.name;
 		}
 
 	public String getCourseCode()
 		{
-		// TODO
-		return null;
+		// TODO -done
+		return this.courseCode;
 		}
 
 	public List<Student> getCourseRegister()
 		{
-		// TODO
-		return null;
+		// TODO -done
+		return this.courseRoster;
 		}
 	}
