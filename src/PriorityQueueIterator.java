@@ -46,7 +46,10 @@ public class PriorityQueueIterator<T> implements Iterator<PriorityQueueItem<T>>
 	public PriorityQueueItem<T> next()
 		{
 		// TODO
-		return null;
+			if (this.priorityQueue.isEmpty()){
+				throw new NoSuchElementException("List is now empty, can't next");
+			}
+			return this.priorityQueue.dequeue();
 		}
 
 	/**
