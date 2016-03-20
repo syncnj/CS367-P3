@@ -71,9 +71,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				found= true;
 				this.array[i].add(item.getList().dequeue());
-				{
 
-				}
 			}
 		}
 		if (!found){
@@ -96,13 +94,18 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 				done =true;
 			}
 			else {
-				PriorityQueueItem<E> temp = this.array[parent];
-				this.array[parent]= this.array[child];
-				this.array[child]= temp;
+				swapNodes(parent, child);
 				child = parent;
 			}
 		}
 	}
+
+	private void swapNodes (int parent, int child){
+		PriorityQueueItem<E> temp = this.array[parent];
+		this.array[parent]= this.array[child];
+		this.array[child]= temp;
+	}
+
 
 	/**
 	 * Returns the number of items in this PriorityQueue.
@@ -156,10 +159,15 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	public PriorityQueueItem<E> dequeue()
 	{
 		// TODO
+		if (this.currentSize==0){
+			throw new NoSuchElementException();
+		}
 		// Remove first element
-
+		PriorityQueueItem<E> temp = this.array[1];
 		// Replace with last element, percolate down
-		return null;
+		this.array[1]= this.array[this.currentSize];
+		this.percolateDown(1);
+		return temp;
 	}
 
 	/**
@@ -179,6 +187,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	public void clear()
 	{
 		// TODO write appropriate code
+		this.currentSize=0;
 	}
 
 	/**
@@ -191,6 +200,21 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	private void percolateDown(int hole)
 	{
 		// TODO
+		Boolean done = false;
+		int parent = hole;
+		int child = parent*2+1;
+		while (!done) {
+			if (child > this.currentSize) {
+				done =true;
+			}
+			else if (this.array[parent].compareTo(this.array[child])>=0){
+				done = true;
+			}
+			else {
+				swapNodes(parent, child);
+				parent = child;
+			}
+		}
 	}
 
 	/**
