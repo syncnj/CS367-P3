@@ -77,7 +77,9 @@ public class Queue<E> implements QueueADT<E>
      */
     public E peek()
     {
-
+        if (this.numItems==0){
+            throw new EmptyQueueException();
+        }
         return list[front];
     }
 

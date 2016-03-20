@@ -64,10 +64,45 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 		}
 		// Check all nodes and find if one with equal priority exists.
 		// Add to the existing node's list if it does
+		Boolean found=false;
 
+		for (int i=1; i<=this.currentSize; i++){
+			if (this.array[i].getPriority()== item.getPriority()){
+				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				found= true;
+				this.array[i].add(item.getList().dequeue());
+				{
+
+				}
+			}
+		}
+		if (!found){
+			this.currentSize++;
+			this.array[this.currentSize] = item;
+			percolateUp();
+		}
 		// Else create new node with value added to list and percolate it up
 	}
 
+	private void percolateUp(){
+		Boolean done = false;
+		int child = this.currentSize;
+		while (!done){
+			int parent= child/2;
+			if (parent ==0){
+				done =true;
+			}
+			else if (this.array[child].compareTo(this.array[parent])<=0){
+				done =true;
+			}
+			else {
+				PriorityQueueItem<E> temp = this.array[parent];
+				this.array[parent]= this.array[child];
+				this.array[child]= temp;
+				child = parent;
+			}
+		}
+	}
 
 	/**
 	 * Returns the number of items in this PriorityQueue.
