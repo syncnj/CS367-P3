@@ -77,7 +77,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	public int size()
 		{
 		// TODO write appropriate code
-		return 0;
+		return currentSize;
 		}
 
 	/**
