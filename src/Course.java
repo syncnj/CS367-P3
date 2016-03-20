@@ -28,7 +28,13 @@ public class Course
 	public Course(String classCode, String name, int maxCapacity)
 		{
 		// TODO initialize all parameters
+			this.courseCode= classCode;
+			this.name= name;
+			this.maxCapacity= maxCapacity;
+			this.registrationQueue = new PriorityQueue<>();
+			this.courseRoster = new ArrayList<>();
 		}
+
 
 	/**
 	 * Creates a new PriorityqueueItem - with appropriate priority(coins) and
@@ -48,7 +54,8 @@ public class Course
 		// is done in the enqueue method.
 
 		// TODO : see function header
-
+			PriorityQueueItem<Student> newStudent = new PriorityQueueItem<>(coins);
+			this.registrationQueue.enqueue(newStudent);
 		}
 
 	/**

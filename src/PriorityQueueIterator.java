@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -18,6 +19,7 @@ public class PriorityQueueIterator<T> implements Iterator<PriorityQueueItem<T>>
 		// TODO
 		// This copies the contents of the passed parameter to the local object.
 		// Hint : see copy constructor in PriorityQueue
+			this.priorityQueue = new PriorityQueue<>(pq);
 		}
 
 	/**
@@ -29,7 +31,7 @@ public class PriorityQueueIterator<T> implements Iterator<PriorityQueueItem<T>>
 	public boolean hasNext()
 		{
 		// TODO
-		return false;
+		return !this.priorityQueue.isEmpty();
 		}
 
 	/**
