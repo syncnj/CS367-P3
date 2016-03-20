@@ -59,12 +59,15 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 		{
 		// TODO write appropriate code
 		// Check if array is full - double if necessary
-
+		if (this.currentSize==this.array.length){
+			doubleArray();
+		}
 		// Check all nodes and find if one with equal priority exists.
 		// Add to the existing node's list if it does
 
 		// Else create new node with value added to list and percolate it up
 		}
+
 
 	/**
 	 * Returns the number of items in this PriorityQueue.

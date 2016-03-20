@@ -17,7 +17,7 @@ public class Queue<E> implements QueueADT<E>
 
     public Queue()
     {
-        list =(E[])new Object[DEFAULT_LENGTH];
+      list =(E[])new Object[DEFAULT_LENGTH];
     }
 
     /**
