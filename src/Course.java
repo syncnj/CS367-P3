@@ -55,6 +55,7 @@ public class Course
 
 		// TODO : see function header
 			PriorityQueueItem<Student> newStudent = new PriorityQueueItem<>(coins);
+			newStudent.add(student);
 			this.registrationQueue.enqueue(newStudent);
 		}
 
