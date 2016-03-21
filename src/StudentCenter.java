@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -60,16 +61,15 @@ public class StudentCenter
 				int currentType =0;
 				String delim = " ";
 				String newStudentName=null;
-				Student newStudent;
+				Student newStudent= null;
 				String newStudentID=null;
 				while (scnr.hasNext()){
 					String temp = scnr.nextLine().trim();
-					System.out.println(temp);
+					//System.out.println(temp);
 					if (temp.contains("#")){
 
 						if (temp.contains("Points")){
 							currentType=1;
-
 						}else if (temp.contains("Courses")){
 							currentType=2;
 						}else if (temp.contains("Student")){
@@ -98,12 +98,28 @@ public class StudentCenter
 						else if (currentType==4){
 							newStudentID = temp;
 							currentType++;
+							newStudent = new Student(newStudentName,newStudentID, DEFAULT_POINTS);
+							studentList.add(newStudent);
 						}
 						else if (currentType==5){
 							String tokens[] =temp.split(delim);
 							int coins = Integer.parseInt(tokens[1]);
-							newStudent = new Student(newStudentName,newStudentID, DEFAULT_POINTS);
-							studentList.add(newStudent);
+
+							Iterator<Course> itr = courseList.iterator();
+							Boolean found = false;
+							while (itr.hasNext()& !found){
+								Course tempCourse = itr.next();
+								if (tempCourse.getCourseCode().equals(tokens[0])){
+									found =true;
+									tempCourse.addStudent(newStudent,coins);
+									System.out.println(newStudentName+ tempCourse.getCourseCode());
+								}
+							}
+							if (!found){
+								System.out.println("Couse is not in the list!!!!!");
+							}
+
+
 							//why do this>?>>
 						}
 						else  {
@@ -114,6 +130,7 @@ public class StudentCenter
 						}
 					}
 				}
+
 
 
 

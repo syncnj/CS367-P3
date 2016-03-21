@@ -70,7 +70,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 			if (this.array[i].getPriority()== item.getPriority()){
 				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				found= true;
-				this.array[i].add(item.getList().dequeue());
+				this.array[i].add(item.getList().peek());
 
 			}
 		}
