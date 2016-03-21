@@ -53,20 +53,23 @@ public class StudentCenter
 			{
 			// TODO parse the input file as described in the P3 specification.
 			// make sure to call course.addStudent() appropriately.
-				Scanner scnr = new Scanner(fileName);
+
+				File file = new File (fileName);
+				Scanner scnr = new Scanner(file);
 				//currentType: 0: N/A, 1:Points/Student, 2:Courses, 3: Student name, 4:Stu ID, 5: Course choice
 				int currentType =0;
 				String delim = " ";
-
+				String newStudentName=null;
+				Student newStudent;
+				String newStudentID=null;
 				while (scnr.hasNext()){
 					String temp = scnr.nextLine().trim();
-
+					System.out.println(temp);
 					if (temp.contains("#")){
-						if (currentType==5){
-							studentList.add(newStudent);
-						}
+
 						if (temp.contains("Points")){
 							currentType=1;
+
 						}else if (temp.contains("Courses")){
 							currentType=2;
 						}else if (temp.contains("Student")){
@@ -88,20 +91,25 @@ public class StudentCenter
 
 						}
 						else if (currentType==3){
+							newStudentName= temp;
 							currentType++;
-							static String newStudentName= temp;
 						}
+
 						else if (currentType==4){
+							newStudentID = temp;
 							currentType++;
-							int newStudentID = Integer.parseInt(temp);
 						}
 						else if (currentType==5){
 							String tokens[] =temp.split(delim);
-							Student newStudent = new Student(newStudentName,newStudentID, )
+							int coins = Integer.parseInt(tokens[1]);
+							newStudent = new Student(newStudentName,newStudentID, DEFAULT_POINTS);
+							studentList.add(newStudent);
+							//why do this>?>>
 						}
 						else  {
+
 							//This should not happen
-							System.out.print("Something is wrong");
+							System.out.print("Something is wrong" + currentType);
 							System.exit(91);
 						}
 					}
