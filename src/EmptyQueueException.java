@@ -5,6 +5,6 @@
 public class EmptyQueueException extends RuntimeException
 	{
 		public EmptyQueueException(){
-			throw super();
+			 super();
 		}
 	}

@@ -53,6 +53,63 @@ public class StudentCenter
 			{
 			// TODO parse the input file as described in the P3 specification.
 			// make sure to call course.addStudent() appropriately.
+				Scanner scnr = new Scanner(fileName);
+				//currentType: 0: N/A, 1:Points/Student, 2:Courses, 3: Student name, 4:Stu ID, 5: Course choice
+				int currentType =0;
+				String delim = " ";
+
+				while (scnr.hasNext()){
+					String temp = scnr.nextLine().trim();
+
+					if (temp.contains("#")){
+						if (currentType==5){
+							studentList.add(newStudent);
+						}
+						if (temp.contains("Points")){
+							currentType=1;
+						}else if (temp.contains("Courses")){
+							currentType=2;
+						}else if (temp.contains("Student")){
+							currentType=3;
+						}else {
+							currentType=0; //This should not happen!!!
+							System.out.print("WTF");
+						}
+					}
+					else {
+						if (currentType==1){
+							DEFAULT_POINTS = Integer.parseInt(temp);
+							// WHen to use it?!!!!!!!!!!!!!!!!!!!!
+						}
+						else if (currentType ==2){
+							String tokens[] =temp.split(delim);
+							Course newCourse = new Course(tokens[0],tokens[1],Integer.parseInt(tokens[2]));
+							courseList.add(newCourse);
+
+						}
+						else if (currentType==3){
+							currentType++;
+							static String newStudentName= temp;
+						}
+						else if (currentType==4){
+							currentType++;
+							int newStudentID = Integer.parseInt(temp);
+						}
+						else if (currentType==5){
+							String tokens[] =temp.split(delim);
+							Student newStudent = new Student(newStudentName,newStudentID, )
+						}
+						else  {
+							//This should not happen
+							System.out.print("Something is wrong");
+							System.exit(91);
+						}
+					}
+				}
+
+
+
+
 			}
 		catch(Exception e)
 			{
