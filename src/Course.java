@@ -68,7 +68,10 @@ public class Course
 		// Use the PriorityQueueIterator for this task.
 			PriorityQueueIterator<Student> itr = new PriorityQueueIterator<>(this.registrationQueue);
 			while (itr.hasNext()){
-
+				Queue<Student> temp = itr.next().getList();
+				while (!temp.isEmpty()){
+					this.courseRoster.add(temp.dequeue());
+				}
 			}
 		}
 
