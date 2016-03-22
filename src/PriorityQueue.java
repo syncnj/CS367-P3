@@ -206,33 +206,38 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 		// TODO
 		Boolean done = false;
 		int parent = hole;
-		int child1 = parent*2;
-		int child2 = parent*2+1;
 		int child=-1;
-		if (child1>this.currentSize){
-			done = true;
-		}
-		else if (child2>this.currentSize){
-			child = child1;
-		}
-		else {
-			child = this.array[child1].compareTo(this.array[child2])>=0 ? child1: child2;
-		}
 
 
 		while (!done) {
-			if (child > this.currentSize) {
-				done =true;
-			}
-			else if (this.array[parent].compareTo(this.array[child])>=0){
+			int child1 = parent*2;
+			int child2 = parent*2+1;
+
+			if (child1>this.currentSize){
 				done = true;
 			}
+			else if (child2>this.currentSize){
+				child = child1;
+			}
 			else {
-				swapNodes(parent, child);
-				System.out.print("Swapped: "+ parent + " & "+ child + "\n");
-				parent = child;
+				child = this.array[child1].compareTo(this.array[child2])>=0 ? child1: child2;
+			}
+
+			if (!done){
+				if (child > this.currentSize) {
+					done =true;
+				}
+				else if (this.array[parent].compareTo(this.array[child])>=0){
+					done = true;
+				}
+				else {
+					swapNodes(parent, child);
+					System.out.print("Swapped: "+ parent + " & "+ child + "\n");
+					parent = child;
+				}
 			}
 		}
+		System.out.println("Exit percolate down");
 	}
 
 	/**
