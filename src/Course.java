@@ -70,7 +70,7 @@ public class Course
 			PriorityQueueIterator<Student> itr = new PriorityQueueIterator<>(this.registrationQueue);
 			while (itr.hasNext()){
 				Queue<Student> temp = itr.next().getList();
-				while (!temp.isEmpty()){
+				while (!temp.isEmpty() && this.courseRoster.size()< this.maxCapacity){
 					this.courseRoster.add(temp.dequeue());
 				}
 			}
