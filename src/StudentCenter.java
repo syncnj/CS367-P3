@@ -113,6 +113,7 @@ public class StudentCenter
 							if (newStudent.deductCoins(coins)) {
 								tempCourse.addStudent(newStudent, coins);
 								System.out.println(newStudentName + tempCourse.getCourseCode());
+								newStudent.addToCart(tempCourse);
 							}
 //							Iterator<Course> itr = courseList.iterator();
 //							Boolean found = false;
