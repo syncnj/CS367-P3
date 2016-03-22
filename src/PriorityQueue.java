@@ -208,7 +208,18 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 		int parent = hole;
 		int child1 = parent*2;
 		int child2 = parent*2+1;
-		int child = this.array[child1].compareTo(this.array[child2])>=0 ? child1: child2;
+		int child=-1;
+		if (child1>this.currentSize){
+			done = true;
+		}
+		else if (child2>this.currentSize){
+			child = child1;
+		}
+		else {
+			child = this.array[child1].compareTo(this.array[child2])>=0 ? child1: child2;
+		}
+
+
 		while (!done) {
 			if (child > this.currentSize) {
 				done =true;
