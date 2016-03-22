@@ -30,6 +30,9 @@ public class Queue<E> implements QueueADT<E>
      */
     public void enqueue(E item)
     {
+        if (item == null){
+            throw new IllegalArgumentException();
+        }
         if (numItems == list.length){
             expandCapacity();
         }
