@@ -71,13 +71,15 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				found= true;
 				this.array[i].add(item.getList().peek());
-
+				System.out.print("inserting to existing node: ");
 			}
 		}
 		if (!found){
 			this.currentSize++;
 			this.array[this.currentSize] = item;
+			System.out.print("creating a new node at: "+ this.currentSize);
 			percolateUp();
+
 		}
 		// Else create new node with value added to list and percolate it up
 	}
@@ -95,6 +97,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 			}
 			else {
 				swapNodes(parent, child);
+				System.out.print("trying to swap nodes: " + parent + " & "+ child);
 				child = parent;
 			}
 		}

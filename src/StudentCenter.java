@@ -36,7 +36,6 @@ public class StudentCenter
 			System.err.println("Failed to initialize the application!");
 			System.exit(1);
 			}
-
 		generateAndWriteResults(args[1], args[2]);
 		}
 
@@ -105,19 +104,29 @@ public class StudentCenter
 							String tokens[] =temp.split(delim);
 							int coins = Integer.parseInt(tokens[1]);
 
-							Iterator<Course> itr = courseList.iterator();
-							Boolean found = false;
-							while (itr.hasNext()& !found){
-								Course tempCourse = itr.next();
-								if (tempCourse.getCourseCode().equals(tokens[0])){
-									found =true;
-									tempCourse.addStudent(newStudent,coins);
-									System.out.println(newStudentName+ tempCourse.getCourseCode());
-								}
+							Course tempCourse = getCourseFromCourseList(tokens[0]);
+							if (tempCourse== null){
+								System.out.print("Something is wrong");
+								System.exit(100);
+
 							}
-							if (!found){
-								System.out.println("Couse is not in the list!!!!!");
+							if (newStudent.deductCoins(coins)) {
+								tempCourse.addStudent(newStudent, coins);
+								System.out.println(newStudentName + tempCourse.getCourseCode());
 							}
+//							Iterator<Course> itr = courseList.iterator();
+//							Boolean found = false;
+//							while (itr.hasNext()& !found){
+//								Course tempCourse = itr.next();
+//								if (tempCourse.getCourseCode().equals(tokens[0])){
+//									found =true;
+//									tempCourse.addStudent(newStudent,coins);
+//
+//								}
+//							}
+//							if (!found){
+//								System.out.println("Couse is not in the list!!!!!");
+//							}
 
 
 							//why do this>?>>
