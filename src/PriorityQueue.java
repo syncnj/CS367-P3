@@ -59,8 +59,10 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	{
 		// TODO write appropriate code
 		// Check if array is full - double if necessary
-		if (this.currentSize==this.array.length){
+		//System.out.print("Before: current size: "+ currentSize + "<--" + array.length+ "!!!!");
+		if (this.currentSize==this.array.length-1){
 			doubleArray();
+			//System.out.println("I just expanded!!!!");
 		}
 		// Check all nodes and find if one with equal priority exists.
 		// Add to the existing node's list if it does
@@ -71,13 +73,13 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				found= true;
 				this.array[i].add(item.getList().peek());
-				System.out.print("existing node: "+ item.getPriority());
+				//System.out.print("existing node: "+ item.getPriority());
 			}
 		}
 		if (!found){
 			this.currentSize++;
 			this.array[this.currentSize] = item;
-			System.out.print("creating a new node at: "+ this.currentSize);
+			//System.out.print("creating a new node at: "+ this.currentSize);
 			percolateUp();
 
 		}
