@@ -123,5 +123,8 @@ public class Queue<E> implements QueueADT<E>
         E[] newList = (E[])new Object[2*numItems];
         System.arraycopy(list,front, newList,0, list.length-front);
         System.arraycopy(list,0,newList,list.length-front, front);
+        this.list = newList;
+        this.front=0;
+        this.rear = this.numItems-1;
     }
 }
