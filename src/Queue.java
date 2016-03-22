@@ -45,7 +45,7 @@ public class Queue<E> implements QueueADT<E>
 
     private int incrementIndex(int input){
 
-        if (input==list.length){
+        if (input==list.length-1){
             input=-1;
         }
         return ++input;

@@ -166,12 +166,12 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 			throw new NoSuchElementException();
 		}
 		// Remove first element
-		PriorityQueueItem<E> temp = this.array[1];
+		PriorityQueueItem<E> returnItem = this.array[1];
 		// Replace with last element, percolate down
 		this.array[1]= this.array[this.currentSize];
 		this.currentSize--;
 		this.percolateDown(1);
-		return temp;
+		return returnItem;
 	}
 
 	/**
@@ -206,7 +206,9 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 		// TODO
 		Boolean done = false;
 		int parent = hole;
-		int child = parent*2+1;
+		int child1 = parent*2;
+		int child2 = parent*2+1;
+		int child = this.array[child1].compareTo(this.array[child2])>=0 ? child1: child2;
 		while (!done) {
 			if (child > this.currentSize) {
 				done =true;
