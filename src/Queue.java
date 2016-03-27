@@ -1,3 +1,22 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Main Class File:  StudentCenter.java
+// Files:            Queue.java
+// Semester:         CS367 Spring 2016
+//
+// Author:           Yi Shen yshen59@wisc.edu
+// CS Login:         sheny
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+// Pair Partner:     Yifei Feng
+// Email:            yfeng59@wisc.edu
+// CS Login:         yifei
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
 /**
  * An ordered collection of items, where items are added to the rear and removed
  * from the front.
@@ -5,7 +24,6 @@
 public class Queue<E> implements QueueADT<E>
 {
 
-    // TODO
     // You may use a naive expandable circular array or a chain of listnodes.
     // You may NOT use Java's predefined classes such as ArrayList or
     // LinkedList.
