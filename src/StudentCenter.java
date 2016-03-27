@@ -131,6 +131,12 @@ public class StudentCenter
 						else if (currentType==5){
 							String tokens[] =temp.split(delim);
 							int coins = Integer.parseInt(tokens[1]);
+							if (coins<0){
+								System.out.println("WARNING: Negative coins: "+ tokens[0] +" with coins: "+ coins);
+								System.out.println("Automatically convert to 0 coins");
+								coins=0;
+							}
+
 							Course courseToAdd = getCourseFromCourseList(tokens[0]);
 
 							//check if class is valid:
@@ -225,7 +231,7 @@ public class StudentCenter
 	/**
 	 * Look up Course from classCode
 	 * 
-	 * @param courseCode
+	 * @param courseCode course code to get
 	 * @return Course object
 	 */
 	private static Course getCourseFromCourseList(String courseCode)

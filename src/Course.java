@@ -1,8 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                   ALL STUDENTS COMPLETE THESE SECTIONS
 // Main Class File:  StudentCenter.java
-// Files:            Course.java; EmptyQueueException.java; PriorityQueue.java; PriorityQueueItem.java;
-// 					 PriorityQueueIterator.java ; Queue.java; Student.java; StudentCenter.java
+// Files:            Course.java
 // Semester:         CS367 Spring 2016
 //
 // Author:           Yi Shen yshen59@wisc.edu
@@ -48,6 +47,9 @@ public class Course
 
 	public Course(String classCode, String name, int maxCapacity)
 		{
+			if (classCode==null || name ==null) {
+				throw new NullPointerException("NULL classCode/name");
+			}
 			this.courseCode= classCode;
 			this.name= name;
 			this.maxCapacity= maxCapacity;
@@ -72,7 +74,12 @@ public class Course
 		// Enqueue a newly created PQItem.
 		// Checking if a PriorityQueueItem with the same priority already exists
 		// is done in the enqueue method.
-
+			if (student==null ) {
+				throw new NullPointerException("NULL student passed in");
+			}
+			if (coins<0){
+				throw new RuntimeException("trying to add student with Negative coins ");
+			}
 			PriorityQueueItem<Student> newStudent = new PriorityQueueItem<>(coins);
 			newStudent.add(student);
 			this.registrationQueue.enqueue(newStudent);

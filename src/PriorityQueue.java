@@ -1,3 +1,24 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Main Class File:  StudentCenter.java
+// Files:            PriorityQueue.java
+// Semester:         CS367 Spring 2016
+//
+// Author:           Yi Shen yshen59@wisc.edu
+// CS Login:         sheny
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+// Pair Partner:     Yifei Feng
+// Email:            yfeng59@wisc.edu
+// CS Login:         yifei
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
+
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -43,6 +64,9 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	 */
 	public PriorityQueue(PriorityQueue<E> pq)
 	{
+		if (pq == null){
+			throw new NullPointerException("PriorityQueue to be copied is NULL");
+		}
 		this.currentSize = pq.currentSize;
 		this.array = Arrays.copyOf(pq.array, currentSize + 1);
 	}
@@ -57,35 +81,47 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	@Override
 	public void enqueue(PriorityQueueItem<E> item)
 	{
-		// TODO write appropriate code
 		// Check if array is full - double if necessary
-		//System.out.print("Before: current size: "+ currentSize + "<--" + array.length+ "!!!!");
 		if (this.currentSize==this.array.length-1){
 			doubleArray();
-			//System.out.println("I just expanded!!!!");
 		}
 		// Check all nodes and find if one with equal priority exists.
 		// Add to the existing node's list if it does
+		if (item == null){
+			throw new NullPointerException("PQitem passed in is NULL");
+		}
+
+
 		Boolean found=false;
 
 		for (int i=1; i<=this.currentSize; i++){
 			if (this.array[i].getPriority()== item.getPriority()){
-				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				found= true;
-				this.array[i].add(item.getList().peek());
-				//System.out.print("existing node: "+ item.getPriority());
+
+				//Add everything in the item to the list
+				Queue<E> itemQueue = item.getList();
+				while (!itemQueue.isEmpty()){
+					this.array[i].add(item.getList().dequeue());
+				}
+
 			}
 		}
+
+		// Else create new node with value added to list and percolate it up
 		if (!found){
 			this.currentSize++;
 			this.array[this.currentSize] = item;
-			//System.out.print("creating a new node at: "+ this.currentSize);
 			percolateUp();
 
 		}
-		// Else create new node with value added to list and percolate it up
-	}
 
+	}
+	/**
+	 *
+	 * PercolateUp the Priority Queue, make sure the items in the upper level has a higher priority than the lower level.
+	 *
+
+	 */
 	private void percolateUp(){
 		Boolean done = false;
 		int child = this.currentSize;
@@ -99,12 +135,16 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 			}
 			else {
 				swapNodes(parent, child);
-				//System.out.print("trying to swap nodes: " + parent + " & "+ child);
 				child = parent;
 			}
 		}
 	}
-
+	/**
+	 * Swap two nodes in the priority queue
+	 *
+	 * @param (parent) (the first item)
+	 * @param (child) (the second item)
+	 */
 	private void swapNodes (int parent, int child){
 		PriorityQueueItem<E> temp = this.array[parent];
 		this.array[parent]= this.array[child];
@@ -119,7 +159,6 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	 */
 	public int size()
 	{
-		// TODO write appropriate code
 		return currentSize;
 	}
 
@@ -131,7 +170,6 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	 */
 	public Iterator<PriorityQueueItem<E>> iterator()
 	{
-		// TODO write appropriate code - see PriortyQueueIterator constructor
 		return new PriorityQueueIterator<>(this);
 	}
 
@@ -145,7 +183,6 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	@Override
 	public PriorityQueueItem<E> peek()
 	{
-		// TODO fill in appropriate code, replace default return statement
 		if (this.currentSize==0){
 			throw new NoSuchElementException();
 		}
@@ -163,7 +200,6 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	@Override
 	public PriorityQueueItem<E> dequeue()
 	{
-		// TODO
 		if (this.currentSize==0){
 			throw new NoSuchElementException();
 		}
@@ -192,7 +228,6 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	 */
 	public void clear()
 	{
-		// TODO write appropriate code
 		this.currentSize=0;
 	}
 
@@ -205,19 +240,16 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	 */
 	private void percolateDown(int hole)
 	{
-		// TODO
 
 		boolean done = false;
 		while(!done){
 			if((hole*2) > currentSize) done = true;
 			else{
-				PriorityQueueItem<E> largest = getLargest(hole);
+				int largestChildIndex = getLargestChildIndex(hole);
 				PriorityQueueItem<E> current = array[hole];
-				if(current.compareTo(largest)<0){    //current item is lesser than its child
-					int child =getIndex(largest);
-					array[child]= array[hole];
-					array[hole] = largest;
-					hole = child;
+				if(current.compareTo(array[largestChildIndex])<0){    //current item is lesser than its child
+					swapNodes(hole,largestChildIndex);
+					hole = largestChildIndex;
 				}
 				else {
 					done = true;
@@ -225,65 +257,26 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 			}
 		}
 
-
-
-
-
-
-
-		//Boolean done = false;
-		//int parent = hole;
-		//int child=-1;
-
-
-	/*	while (!done) {
-			int child1 = parent*2;
-			int child2 = parent*2+1;
-
-			if (child1>this.currentSize){
-				done = true;
-			}
-			else if (child2>this.currentSize){
-				child = child1;
-			}
-			else {
-				child = this.array[child1].compareTo(this.array[child2])>=0 ? child1: child2;
-			}
-
-			if (!done){
-				if (child > this.currentSize) {
-					done =true;
-				}
-				else if (this.array[parent].compareTo(this.array[child])>=0){
-					done = true;
-				}
-				else {
-					swapNodes(parent, child);
-					System.out.print("Swapped: "+ parent + " & "+ child + "\n");
-					parent = child;
-				}
-			}
-		}*/
-		//System.out.println("Exit percolate down");
 	}
 
-
-	private PriorityQueueItem<E> getLargest(int index){
+	/**
+	 * (Write a succinct description of this method here.  If necessary,
+	 * additional paragraphs should be preceded by <p>, the html tag for
+	 * a new paragraph.)
+	 *
+	 * @param (index) the index to find the largest child item
+	 * @return  the index of the largest child item
+	 */
+	private int getLargestChildIndex(int index){
+		if (2*index+1 > this.currentSize) return 2*index;//check if right exist
 		PriorityQueueItem<E> left = array[2*index];
 		PriorityQueueItem<E> right = array[2*index +1];
-		if(right == null) return left;
-		if(left.getPriority()>right.getPriority()) return left;
-		else{
-			return right;
-		}
-	}
-	private int getIndex(PriorityQueueItem<E> pq){
-		for(int i = 1; i<=currentSize; i++){
-			if(pq.getPriority() == array[i].getPriority()) return i;
-		}
-		return 0;
-	}
 
+		if(left.getPriority()>right.getPriority()) return 2*index;
+		else{
+			return 2*index+1;
+		}
+	}
 
 
 

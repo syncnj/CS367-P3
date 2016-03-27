@@ -1,3 +1,24 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Main Class File:  StudentCenter.java
+// Files:            PriorityQueueIterator.java
+// Semester:         CS367 Spring 2016
+//
+// Author:           Yi Shen yshen59@wisc.edu
+// CS Login:         sheny
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+// Pair Partner:     Yifei Feng
+// Email:            yfeng59@wisc.edu
+// CS Login:         yifei
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
+
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -11,13 +32,15 @@ public class PriorityQueueIterator<T> implements Iterator<PriorityQueueItem<T>>
 	 * PriorityQueue. Hint : The local priorityQueue object need not be
 	 * preserved, and hence you can use the dequeue() operation.
 	 * 
-	 * @param pq
+	 * @param pq the original queue to iterate
 	 */
 	public PriorityQueueIterator(PriorityQueue<T> pq)
 		{
-		// TODO
 		// This copies the contents of the passed parameter to the local object.
 		// Hint : see copy constructor in PriorityQueue
+			if (pq==null ) {
+				throw new NullPointerException("NULL PriorityQueue passed in");
+			}
 			this.priorityQueue = new PriorityQueue<>(pq);
 		}
 
@@ -29,7 +52,6 @@ public class PriorityQueueIterator<T> implements Iterator<PriorityQueueItem<T>>
 	@Override
 	public boolean hasNext()
 		{
-		// TODO
 		return !this.priorityQueue.isEmpty();
 		}
 
@@ -44,9 +66,8 @@ public class PriorityQueueIterator<T> implements Iterator<PriorityQueueItem<T>>
 	@Override
 	public PriorityQueueItem<T> next()
 		{
-		// TODO
 			if (this.priorityQueue.isEmpty()){
-				throw new NoSuchElementException("List is now empty, can't next");
+				throw new NoSuchElementException("Already traversed to the end");
 			}
 			return this.priorityQueue.dequeue();
 		}

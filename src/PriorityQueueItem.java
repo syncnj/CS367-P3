@@ -1,8 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                   ALL STUDENTS COMPLETE THESE SECTIONS
 // Main Class File:  StudentCenter.java
-// Files:            Course.java; EmptyQueueException.java; PriorityQueue.java; PriorityQueueItem.java;
-// 					 PriorityQueueIterator.java ; Queue.java; Student.java; StudentCenter.java
+// Files:            PriorityQueueItem.java
 // Semester:         CS367 Spring 2016
 //
 // Author:           Yi Shen yshen59@wisc.edu
