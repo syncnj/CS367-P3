@@ -99,7 +99,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 			}
 			else {
 				swapNodes(parent, child);
-				System.out.print("trying to swap nodes: " + parent + " & "+ child);
+				//System.out.print("trying to swap nodes: " + parent + " & "+ child);
 				child = parent;
 			}
 		}
