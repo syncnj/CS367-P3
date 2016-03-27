@@ -1,3 +1,24 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Main Class File:  StudentCenter.java
+// Files:            Course.java; EmptyQueueException.java; PriorityQueue.java; PriorityQueueItem.java;
+// 					 PriorityQueueIterator.java ; Queue.java; Student.java; StudentCenter.java
+// Semester:         CS367 Spring 2016
+//
+// Author:           Yi Shen yshen59@wisc.edu
+// CS Login:         sheny
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+// Pair Partner:     Yifei Feng
+// Email:            yfeng59@wisc.edu
+// CS Login:         yifei
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +48,6 @@ public class Course
 
 	public Course(String classCode, String name, int maxCapacity)
 		{
-		// TODO initialize all parameters
 			this.courseCode= classCode;
 			this.name= name;
 			this.maxCapacity= maxCapacity;
@@ -53,7 +73,6 @@ public class Course
 		// Checking if a PriorityQueueItem with the same priority already exists
 		// is done in the enqueue method.
 
-		// TODO : see function header
 			PriorityQueueItem<Student> newStudent = new PriorityQueueItem<>(coins);
 			newStudent.add(student);
 			this.registrationQueue.enqueue(newStudent);
@@ -65,32 +84,36 @@ public class Course
 	 */
 	public void processRegistrationList()
 		{
-		// TODO : populate courseRoster from registrationQueue
 		// Use the PriorityQueueIterator for this task.
 			PriorityQueueIterator<Student> itr = new PriorityQueueIterator<>(this.registrationQueue);
-			while (itr.hasNext()){
-				Queue<Student> temp = itr.next().getList();
-				while (!temp.isEmpty() && this.courseRoster.size()< this.maxCapacity){
-					this.courseRoster.add(temp.dequeue());
+
+			boolean courseIsFull=false;
+			//Signal course full for faster course processing
+
+			while (itr.hasNext() && !courseIsFull){
+				Queue<Student> studentList = itr.next().getList();
+				if (this.classCount>= this.maxCapacity){
+					courseIsFull=true;
+				}
+				while (!studentList.isEmpty() && !courseIsFull){
+					this.courseRoster.add(studentList.dequeue());
+					this.classCount++;
 				}
 			}
 		}
 
 	public String getCourseName()
 		{
-		// TODO - done
 		return this.name;
 		}
 
 	public String getCourseCode()
 		{
-		// TODO -done
 		return this.courseCode;
 		}
 
 	public List<Student> getCourseRegister()
 		{
-		// TODO -done
 		return this.courseRoster;
 		}
 	}

@@ -6,8 +6,8 @@
 // Semester:         CS367 Spring 2016
 //
 // Author:           Yi Shen
-// Email:            yshen59@wisc.edu; yfeng59@wisc.edu
-// CS Login:         sheny; yifei
+// Email:            yshen59@wisc.edu
+// CS Login:         sheny
 // Lecturer's Name:  Jim Skretny
 // Lab Section:      N/A
 //
@@ -103,6 +103,8 @@ public class StudentCenter
 							System.out.print("Invalid Input file content");
 						}
 					}
+
+					//If line contains data to process:
 					else {
 						if (currentType==1){
 							DEFAULT_POINTS = Integer.parseInt(temp);
