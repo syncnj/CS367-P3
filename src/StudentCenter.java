@@ -79,7 +79,7 @@ public class StudentCenter
 				//Allocate variables for new Student
 				String newStudentName= null;
 				Student newStudent= null;
-				String newStudentID=null;
+				String newStudentID;
 
 				while (scnr.hasNextLine()){
 					String temp = scnr.nextLine().trim();
