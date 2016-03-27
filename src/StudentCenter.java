@@ -5,13 +5,20 @@
 // 					 PriorityQueueIterator.java ; Queue.java; Student.java; StudentCenter.java
 // Semester:         CS367 Spring 2016
 //
-// Author:           Yi Shen; Yifei Feng
+// Author:           Yi Shen
 // Email:            yshen59@wisc.edu; yfeng59@wisc.edu
 // CS Login:         sheny; yifei
 // Lecturer's Name:  Jim Skretny
 // Lab Section:      N/A
 //
-
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+// Pair Partner:     Yifei Feng
+// Email:            yfeng59@wisc.edu
+// CS Login:         yifei
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
 
 import java.io.File;
 import java.io.FileNotFoundException;
