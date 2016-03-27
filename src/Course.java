@@ -92,9 +92,12 @@ public class Course
 
 			while (itr.hasNext() && !courseIsFull){
 				Queue<Student> studentList = itr.next().getList();
+
 				if (this.classCount>= this.maxCapacity){
 					courseIsFull=true;
 				}
+
+				//Traverse the list for students with the same priority
 				while (!studentList.isEmpty() && !courseIsFull){
 					this.courseRoster.add(studentList.dequeue());
 					this.classCount++;
