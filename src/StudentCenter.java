@@ -1,3 +1,18 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Title:            Student Center
+// Files:            Course.java; EmptyQueueException.java; PriorityQueue.java; PriorityQueueItem.java;
+// 					 PriorityQueueIterator.java ; Queue.java; Student.java; StudentCenter.java
+// Semester:         CS367 Spring 2016
+//
+// Author:           Yi Shen; Yifei Feng
+// Email:            yshen59@wisc.edu; yfeng59@wisc.edu
+// CS Login:         sheny; yifei
+// Lecturer's Name:  Jim Skretny
+// Lab Section:      N/A
+//
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -51,20 +66,23 @@ public class StudentCenter
 		{
 		try
 			{
-			// TODO parse the input file as described in the P3 specification.
 			// make sure to call course.addStudent() appropriately.
 
 				File file = new File (fileName);
 				Scanner scnr = new Scanner(file);
+
 				//currentType: 0: N/A, 1:Points/Student, 2:Courses, 3: Student name, 4:Stu ID, 5: Course choice
 				int currentType =0;
+
 				String delim = " ";
-				String newStudentName=null;
+
+				//Allocate variables for new Student
+				String newStudentName= null;
 				Student newStudent= null;
 				String newStudentID=null;
+
 				while (scnr.hasNextLine()){
 					String temp = scnr.nextLine().trim();
-					//System.out.println(temp);
 					if (temp.contains("#")){
 
 						if (temp.contains("Points")){
@@ -75,13 +93,12 @@ public class StudentCenter
 							currentType=3;
 						}else {
 							currentType=0; //This should not happen!!!
-							//System.out.print("WTF");
+							System.out.print("Invalid Input file content");
 						}
 					}
 					else {
 						if (currentType==1){
 							DEFAULT_POINTS = Integer.parseInt(temp);
-							// WHen to use it?!!!!!!!!!!!!!!!!!!!!
 						}
 						else if (currentType ==2){
 							String tokens[] =temp.split(delim);
@@ -91,54 +108,41 @@ public class StudentCenter
 						}
 						else if (currentType==3){
 							newStudentName= temp;
-							currentType++;
+							currentType=4;
+							//Jump to ID processing for student in next line
 						}
 
 						else if (currentType==4){
 							newStudentID = temp;
-							currentType++;
+							currentType=5;
+							//Jump to add classes in next line
 							newStudent = new Student(newStudentName,newStudentID, DEFAULT_POINTS);
 							studentList.add(newStudent);
 						}
 						else if (currentType==5){
 							String tokens[] =temp.split(delim);
 							int coins = Integer.parseInt(tokens[1]);
-
 							Course courseToAdd = getCourseFromCourseList(tokens[0]);
+
+							//check if class is valid:
 							if (courseToAdd== null){
 								System.out.print(tokens[0]+ " Doesn't exist");
 								//System.exit(100);
 
 							}
+							//Class is found and is valid:
 							else {
 								if (newStudent.deductCoins(coins)) {
 									courseToAdd.addStudent(newStudent, coins);
-									//System.out.println(newStudentName + courseToAdd.getCourseCode());
 									newStudent.addToCart(courseToAdd);
 								}
 							}
-//							Iterator<Course> itr = courseList.iterator();
-//							Boolean found = false;
-//							while (itr.hasNext()& !found){
-//								Course courseToAdd = itr.next();
-//								if (courseToAdd.getCourseCode().equals(tokens[0])){
-//									found =true;
-//									courseToAdd.addStudent(newStudent,coins);
 //
-//								}
-//							}
-//							if (!found){
-//								System.out.println("Couse is not in the list!!!!!");
-//							}
-
-
-							//why do this>?>>
 						}
 						else  {
 
-							//This should not happen
-							System.out.print("Something is wrong" + currentType);
-							//System.exit(91);
+							//This should not happen if input file is valid
+							System.out.print("Input file has invalid format in this line:" + temp);
 						}
 					}
 				}
