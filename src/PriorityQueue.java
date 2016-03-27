@@ -206,9 +206,34 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 	private void percolateDown(int hole)
 	{
 		// TODO
-		Boolean done = false;
-		int parent = hole;
-		int child=-1;
+
+		boolean done = false;
+		while(!done){
+			if((hole*2) > currentSize) done = true;
+			else{
+				PriorityQueueItem<E> largest = getLargest(hole);
+				PriorityQueueItem<E> current = array[hole];
+				if(current.compareTo(largest)<0){    //current item is lesser than its child
+					int child =getIndex(largest);
+					array[child]= array[hole];
+					array[hole] = largest;
+					hole = child;
+				}
+				else {
+					done = true;
+				}
+			}
+		}
+
+
+
+
+
+
+
+		//Boolean done = false;
+		//int parent = hole;
+		//int child=-1;
 
 
 	/*	while (!done) {
@@ -241,6 +266,29 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 		}*/
 		System.out.println("Exit percolate down");
 	}
+
+
+	private PriorityQueueItem<E> getLargest(int index){
+		PriorityQueueItem<E> left = array[2*index];
+		PriorityQueueItem<E> right = array[2*index +1];
+		if(right == null) return left;
+		if(left.getPriority()>right.getPriority()) return left;
+		else{
+			return right;
+		}
+	}
+	private int getIndex(PriorityQueueItem<E> pq){
+		for(int i = 1; i<=currentSize; i++){
+			if(pq.getPriority() == array[i].getPriority()) return i;
+		}
+		return 0;
+	}
+
+
+
+
+
+
 
 	/**
 	 * Internal method to expand array.
