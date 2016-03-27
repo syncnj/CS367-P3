@@ -62,7 +62,7 @@ public class StudentCenter
 				String newStudentName=null;
 				Student newStudent= null;
 				String newStudentID=null;
-				while (scnr.hasNext()){
+				while (scnr.hasNextLine()){
 					String temp = scnr.nextLine().trim();
 					//System.out.println(temp);
 					if (temp.contains("#")){
@@ -75,7 +75,7 @@ public class StudentCenter
 							currentType=3;
 						}else {
 							currentType=0; //This should not happen!!!
-							System.out.print("WTF");
+							//System.out.print("WTF");
 						}
 					}
 					else {
@@ -104,24 +104,26 @@ public class StudentCenter
 							String tokens[] =temp.split(delim);
 							int coins = Integer.parseInt(tokens[1]);
 
-							Course tempCourse = getCourseFromCourseList(tokens[0]);
-							if (tempCourse== null){
-								System.out.print("Something is wrong");
-								System.exit(100);
+							Course courseToAdd = getCourseFromCourseList(tokens[0]);
+							if (courseToAdd== null){
+								System.out.print(tokens[0]+ " Doesn't exist");
+								//System.exit(100);
 
 							}
-							if (newStudent.deductCoins(coins)) {
-								tempCourse.addStudent(newStudent, coins);
-								System.out.println(newStudentName + tempCourse.getCourseCode());
-								newStudent.addToCart(tempCourse);
+							else {
+								if (newStudent.deductCoins(coins)) {
+									courseToAdd.addStudent(newStudent, coins);
+									System.out.println(newStudentName + courseToAdd.getCourseCode());
+									newStudent.addToCart(courseToAdd);
+								}
 							}
 //							Iterator<Course> itr = courseList.iterator();
 //							Boolean found = false;
 //							while (itr.hasNext()& !found){
-//								Course tempCourse = itr.next();
-//								if (tempCourse.getCourseCode().equals(tokens[0])){
+//								Course courseToAdd = itr.next();
+//								if (courseToAdd.getCourseCode().equals(tokens[0])){
 //									found =true;
-//									tempCourse.addStudent(newStudent,coins);
+//									courseToAdd.addStudent(newStudent,coins);
 //
 //								}
 //							}
@@ -136,7 +138,7 @@ public class StudentCenter
 
 							//This should not happen
 							System.out.print("Something is wrong" + currentType);
-							System.exit(91);
+							//System.exit(91);
 						}
 					}
 				}
