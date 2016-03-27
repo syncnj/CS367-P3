@@ -137,7 +137,6 @@ public class StudentCenter
 									newStudent.addToCart(courseToAdd);
 								}
 							}
-//
 						}
 						else  {
 
