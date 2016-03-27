@@ -264,7 +264,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 				}
 			}
 		}*/
-		System.out.println("Exit percolate down");
+		//System.out.println("Exit percolate down");
 	}
 
 

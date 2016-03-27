@@ -113,7 +113,7 @@ public class StudentCenter
 							else {
 								if (newStudent.deductCoins(coins)) {
 									courseToAdd.addStudent(newStudent, coins);
-									System.out.println(newStudentName + courseToAdd.getCourseCode());
+									//System.out.println(newStudentName + courseToAdd.getCourseCode());
 									newStudent.addToCart(courseToAdd);
 								}
 							}
