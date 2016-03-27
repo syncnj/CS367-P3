@@ -211,7 +211,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 		int child=-1;
 
 
-		while (!done) {
+	/*	while (!done) {
 			int child1 = parent*2;
 			int child2 = parent*2+1;
 
@@ -238,7 +238,7 @@ public class PriorityQueue<E> implements QueueADT<PriorityQueueItem<E>>
 					parent = child;
 				}
 			}
-		}
+		}*/
 		System.out.println("Exit percolate down");
 	}
 
